@@ -6,11 +6,7 @@ public class Dice_test {
     public static void main(String[] args) {
         //int i = 0, m = 0;
 
-        int i = (int) (Math.random() * 101);
-        if (i == 0)
-
-            i = 1;
-
+        int i = (int) (Math.random() * 100) + 1;
 
         int m = throwDice(i);
         System.out.println(" Было " + m + " попыток.");
