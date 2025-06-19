@@ -13,21 +13,26 @@ public class Dice_test {
 
 
         int m = throwDice(i);
-        System.out.println(" Было "+m+ " попыток.");
+        System.out.println(" Было " + m + " попыток.");
     }
 
     private static int throwDice(int d_num) {
 
-        System.out.println(d_num);
+        //System.out.println(d_num);
         Scanner s = new Scanner(System.in);
-        int d_number = 1;
+        int d_number = 0, a = 0;
         System.out.println(" Введите число...");
-        while (d_num != s.nextInt()) {
-            System.out.println("Вы не попали сэр...");
+        do {
+            a = s.nextInt();
+            if (a < d_num )
+                System.out.println("Я сам в шоке, но, загаданное число больше, брат...");
+            else if (a > d_num)
+                System.out.println("Не ожидал от тебя такого. Загаданное число меньше, брат...");
             d_number++;
-        }
 
-        System.out.println(" Да это было число "+d_num);
+        } while (d_num != a);
+
+        System.out.println(" Да это было число " + d_num);
         return d_number;
     }
 }
