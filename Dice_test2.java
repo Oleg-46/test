@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Dice_test2 {
     public static Scanner s;
     public static File f;
+    public static int i = (int) (Math.random() * 100) + 1;
 
     public static void main(String[] args) throws IOException {
         //int i = 0, m = 0;
@@ -16,16 +17,13 @@ public class Dice_test2 {
         int i = (int) (Math.random() * 100) + 1;
 
         File f = new File("results.txt");
+
+        System.out.println(" Введите число... Или RESULT для вывода результатов");
         s = new Scanner(System.in);
         String str = s.nextLine().trim();
         if (str.matches("(\\d{1,3})|(RESULT|result|Result)"))
             if (str.charAt(0) == 'R' || str.charAt(0) == 'r')
-                if (!f.exists()) {
-
-                    f.createNewFile();
-                    System.out.println(" Результатов пока нет!");
-                } else
-                    from_file();
+                System.out.println(from_file());
             else {
 
                 int n = Integer.parseInt(str);
@@ -39,7 +37,9 @@ public class Dice_test2 {
         // System.out.println(throwDice(i));
     }
 
-    public static void data_file(String text) throws IOException {
+    public static String data_file(String text) throws IOException {
+
+
 
         FileOutputStream fos = new FileOutputStream(f, true);
 
@@ -48,36 +48,43 @@ public class Dice_test2 {
         return;
     }
 
-    public static void from_file() throws IOException {
+    public static String from_file() throws IOException {
+        if (!f.exists()) {
+
+            f.createNewFile();
+            return "Результатов пока нет!";
+        }
         Scanner sc = new Scanner(f);
         String str2 = sc.nextLine();
         String[] num_str = str2.split(" ");
-        int[] numbers = new int[3];
+        int[] numbers = new int[20];
         int sch = 0;
-        for (String num : num_str) {
+        for (String num : num_str)
             numbers[sch++] = Integer.parseInt(num);
+        sc.close();
 
-            System.out.println(Arrays.toString(numbers));
-            sc.close();
+         return Arrays.toString(numbers);
 
-        }
     }
 
 
     public static String throwDice(int d_num) throws IOException {
 
 
-        int popyt_num = 0, a = 0;
-        System.out.println(" Введите число...");
-        do {
-            a = s.nextInt();
-            if (a < d_num)
+        int popyt_num = 0;
+
+        while (d_num != i)
+
+         {
+
+            if (d_num < i)
                 System.out.println("Я сам в шоке, но, загаданное число больше, брат...");
-            else if (a > d_num)
+            else if (d_num > i)
                 System.out.println("Не ожидал от тебя такого. Загаданное число меньше, брат...");
             popyt_num++;
 
-        } while (d_num != a);
+        }
+        popyt_num == 0 ? popyt_num++ : popyt_num;
 
         System.out.println("  Да это было число " + d_num + "\nБыло " + popyt_num + "попыток.");
 
