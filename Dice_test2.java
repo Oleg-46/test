@@ -14,9 +14,14 @@ public class Dice_test2 {
     public static void main(String[] args) throws IOException {
         //int i = 0, m = 0;
 
-        int i = (int) (Math.random() * 100) + 1;
+
 
         File f = new File("results.txt");
+        if (!f.exists())
+
+            f.createNewFile();
+
+
 
         System.out.println(" Введите число... Или RESULT для вывода результатов");
         s = new Scanner(System.in);
@@ -27,7 +32,7 @@ public class Dice_test2 {
             else {
 
                 int n = Integer.parseInt(str);
-                throwDice(n);
+                System.out.println(throwDice(n));
 
             }
         else return;
@@ -37,7 +42,7 @@ public class Dice_test2 {
         // System.out.println(throwDice(i));
     }
 
-    public static String data_file(String text) throws IOException {
+    public static void data_file(String text) throws IOException {
 
 
 
@@ -49,11 +54,7 @@ public class Dice_test2 {
     }
 
     public static String from_file() throws IOException {
-        if (!f.exists()) {
 
-            f.createNewFile();
-            return "Результатов пока нет!";
-        }
         Scanner sc = new Scanner(f);
         String str2 = sc.nextLine();
         String[] num_str = str2.split(" ");
@@ -71,7 +72,7 @@ public class Dice_test2 {
     public static String throwDice(int d_num) throws IOException {
 
 
-        int popyt_num = 0;
+        int popyt_num = 1;
 
         while (d_num != i)
 
@@ -82,14 +83,20 @@ public class Dice_test2 {
             else if (d_num > i)
                 System.out.println("Не ожидал от тебя такого. Загаданное число меньше, брат...");
             popyt_num++;
+            String str = s.nextLine().trim();
+
+            boolean b = str.matches("\\d{1,3}");
+             if (!b)
+                return " Ошибка ввода брат..." ;
+
+             d_num = Integer.parseInt(str);
+
 
         }
-        popyt_num == 0 ? popyt_num++ : popyt_num;
 
-        System.out.println("  Да это было число " + d_num + "\nБыло " + popyt_num + "попыток.");
 
         data_file("" + popyt_num + " ");
-        return " Было " + popyt_num + "попыток.";
+        return "  Да это было число " + d_num + "\nБыло " + popyt_num + " попыток.";
     }
 }
 
