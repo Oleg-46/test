@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Dice_test2 {
     public static Scanner s;
-    public static File f;
+    public static File f = new File("results.txt");
     public static int i = (int) (Math.random() * 100) + 1;
 
     public static void main(String[] args) throws IOException {
@@ -16,7 +16,7 @@ public class Dice_test2 {
 
 
 
-        File f = new File("results.txt");
+        //File f = new File("results.txt");
         if (!f.exists())
 
             f.createNewFile();
