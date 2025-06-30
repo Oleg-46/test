@@ -23,7 +23,7 @@ public class Dice_test2 {
 
 
 
-        System.out.println(" Введите число... Или RESULT для вывода результатов");
+        System.out.println(" Введите число от 1 до 100... Или RESULT для вывода результатов");
         s = new Scanner(System.in);
         String str = s.nextLine().trim();
         if (str.matches("(\\d{1,3})|(RESULT|result|Result)"))
@@ -56,15 +56,24 @@ public class Dice_test2 {
     public static String from_file() throws IOException {
 
         Scanner sc = new Scanner(f);
-        String str2 = sc.nextLine();
+        String str2;
+        if (sc.hasNextLine())
+              str2 = sc.nextLine();
+        else return " Пока нет рузультатов брат...";
+
         String[] num_str = str2.split(" ");
-        int[] numbers = new int[20];
+        int[] numbers = new int[2000];
         int sch = 0;
         for (String num : num_str)
             numbers[sch++] = Integer.parseInt(num);
         sc.close();
 
-         return Arrays.toString(numbers);
+        int[] numbers2 = Arrays.copyOfRange(numbers,0,sch);
+
+        Arrays.sort(numbers2);
+        return " Лучший результат "+ numbers2[0]+ " попыток, всего было "+sch+ " игр.";
+
+         // return Arrays.toString(numbers);
 
     }
 
